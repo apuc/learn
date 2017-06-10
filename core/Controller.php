@@ -20,7 +20,13 @@ class Controller
 
     public function render($view, $data = [])
     {
-        return $this->parser->render(ROOT_DIR . '/views/' . $view, $data);
+        return $this->parser->render(ROOT_DIR . '/views/' . $this->getClassName() . '/' . $view , $data);
+    }
+
+    public function getClassName()
+    {
+        $path = explode('\\', get_called_class());
+        return strtolower(array_pop($path));
     }
 
 }
